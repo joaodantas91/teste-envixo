@@ -130,7 +130,6 @@ input {
 
 .relative-container {
   position: relative;
-  overflow: hidden;
   height: 310px;
 }
 
@@ -319,10 +318,21 @@ input {
     margin: 50px 0;
   }
 
-  
+  .card-main {
+    margin-top: 30px;
+  }
 }
 @media(max-width: 576px) {
+  .card-main {
+    padding: 20px 20px 15px;
+  }
   .carousel-indicators {
     bottom: 0px;
   }
+
+  .card-main .copyright small {
+    font-size: 12px;
+  }
+
+
 }
