@@ -35,15 +35,54 @@
 
         <div class="form-wrapper">
           <div class="titles">
-            <span class="title active">
+            <span class="title active" id-target="login">
               Login
             </span>
-            <span class="title">
+            <span class="title" id-target="signup">
               Cadastro
             </span>
 
             <span class="green-bar"></span>
+
+            
           </div>
+
+          <form>
+            <div class="relative-container">
+              <div class="inputs-form show" id="login">
+                <input type="email" placeholder="Seu e-mail">
+                <input type="password" placeholder="Crie uma senha">
+                <a href="#">Esqueci minha senha</a>
+  
+              </div>
+  
+  
+              <div class="inputs-form hide" id="signup">
+                <input type="text" placeholder="Nome da Escola">
+                <input type="email" placeholder="Seu e-mail">
+                <input type="password" placeholder="Crie uma senha">
+                <div>
+  
+                  <select class="custom-select"> <!-- DDI select -->
+                    <option value="1">+55</option>
+                    <option value="2">+1</option>
+                    <option value="3">+387</option>
+                  </select> <!-- DDI select end -->
+  
+                  <input type="tel" placeholder="00 00000-0000">
+
+                </div>
+                
+                
+              </div>
+              <button id="submit">
+                <span id="login-button" class="active">Login</span>
+                <span id="signup-button">Cadastrar</span>
+              </button>
+            </div>
+            
+            
+          </form>
         </div>
 
         <div class="copyright">
@@ -80,21 +119,39 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
 
   <script>
-
-    
-
     $(document).ready(()=>{
       
       $("body").removeClass("preload"); // Remove Pre-load class
 
       $('.green-bar').css('width', $('.title.active').width());
+      $('#submit').css('top', $('.inputs-form.show').outerHeight());
+      
 
       $('.title').click(function() {
         if (!$(this).hasClass('active')) {
+          
+          // class changing to animate on handle switch title
           $('.title').removeClass('active');
           $(this).addClass('active');
+          $('.green-bar').css('width', $('.title.active').width());
+          
+
+
+          let idTarget = $(this).attr("id-target");
+
+          $('.inputs-form').css('animation-name', 'hide')
+          $(`.inputs-form[id="${idTarget}"]`).css('animation-name', 'show') // Prevent key frame runs on
+          
+          $('.inputs-form').removeClass('show');
+          $('.inputs-form').addClass('hide');
+          $(`.inputs-form[id="${idTarget}"]`).removeClass('hide');
+          $(`.inputs-form[id="${idTarget}"]`).addClass('show');
+
+          $(`#submit span`).removeClass('active')//submit buttons text changing
+          $(`${'#'+ idTarget}-button`).addClass('active');
         }
         $('.green-bar').css('width', $(this).width());
+        $('#submit').css('top', $('.inputs-form.show').outerHeight());
       })
     });
 
